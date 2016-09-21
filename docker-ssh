@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# docker id might be given as a parameter
+DID=$1
+
+if [[ "$DID" == "" ]]; then
+    # if no id given simply just connect to the first running instance
+    echo "Please specify a container ID. Below are the currently running containers:"
+    sudo docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Names}}"
+    exit;
+fi
+
+sudo docker exec -it $DID /bin/bash
